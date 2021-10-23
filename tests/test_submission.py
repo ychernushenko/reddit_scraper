@@ -145,6 +145,7 @@ def test_get_submissions(mock_search):
             author="-fckmylife-",
             author_fullname="t2_erth9oc6",
             retrieved_on=1634981767,
+            created_at="2021-10-23"
         ),
         submission.Submission(
             title="Kind of a loaded question, but how much racism should I realistically expect if I move here?",
@@ -158,6 +159,7 @@ def test_get_submissions(mock_search):
             author="-fckmylife-",
             author_fullname="t2_erth9oc6",
             retrieved_on=1634981767,
+            created_at="2021-10-23"
         )
     ]
 
@@ -219,6 +221,7 @@ def test_get_submissions_api_response_wrong_data_type(mock_search):
             author="-fckmylife-",
             author_fullname="t2_erth9oc6",
             retrieved_on=1634981767,
+            created_at="2021-10-23"
         )
     ]
 

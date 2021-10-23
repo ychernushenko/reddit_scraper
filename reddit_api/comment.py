@@ -13,7 +13,7 @@ class Comment(NamedTuple):
     author: str
     parent_id: str
     created_utc: int
-    created_date: str
+    created_at: str
 
 
 class CommentSearch:
@@ -61,7 +61,7 @@ class CommentSearch:
                 author=data_item["author"],
                 parent_id=data_item["parent_id"],
                 created_utc=timestamp,
-                created_date=f"{timestamp_as_datetime.year}-{timestamp_as_datetime.month}-{timestamp_as_datetime.day}"
+                created_at=f"{timestamp_as_datetime.year}-{timestamp_as_datetime.month}-{timestamp_as_datetime.day}"
             )
         except ValueError:
             logger.info(f"Unable to to parse reddit API response for comment: {data_item}")

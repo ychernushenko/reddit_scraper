@@ -24,7 +24,7 @@ def main(args):
     spark = SparkSession.builder.appName('reddit.scraper.com').getOrCreate()
     submission_columns = list(Submission._fields)
     submissions_df = spark.createDataFrame(data=submissions, schema=submission_columns)
-    submissions_df.write.partitionBy("created_date").mode("append").parquet(f"./data/submissions.parquet")
+    submissions_df.write.partitionBy("created_at").mode("append").parquet(f"./data/submissions.parquet")
 
     comments = []
     for submission in submissions:
@@ -37,7 +37,7 @@ def main(args):
     if len(comments) > 0:
         comments_columns = list(Comment._fields)
         comments_df = spark.createDataFrame(data=comments, schema=comments_columns)
-        comments_df.write.partitionBy("created_date").mode("append").parquet(f"./data/comments.parquet")
+        comments_df.write.partitionBy("created_at").mode("append").parquet(f"./data/comments.parquet")
     logger.info(f"Data saved in ./data folder")
 
 

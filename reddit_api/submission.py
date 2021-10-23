@@ -18,7 +18,7 @@ class Submission(NamedTuple):
     author: str
     author_fullname: str
     retrieved_on: int
-    created_date: str
+    created_at: str
 
 
 class SubmissionSearch:
@@ -64,7 +64,7 @@ class SubmissionSearch:
                         author=submission["author"],
                         author_fullname=submission["author_fullname"],
                         retrieved_on=int(submission["retrieved_on"]),
-                        created_date=f"{timestamp_as_datetime.year}-{timestamp_as_datetime.month}-{timestamp_as_datetime.day}"
+                        created_at=f"{timestamp_as_datetime.year}-{timestamp_as_datetime.month}-{timestamp_as_datetime.day}"
                     )
                 )
             except ValueError:

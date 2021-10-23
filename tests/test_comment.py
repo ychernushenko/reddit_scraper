@@ -48,6 +48,7 @@ def test_get_comment(mock_search):
         author="Skrt__Skrt",
         parent_id="t3_6uanuh",
         created_utc=1502988145,
+        created_at="2017-8-17",
     )
 
     mock_search.return_value = search_results

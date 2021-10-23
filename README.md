@@ -20,8 +20,8 @@ locally in Parquet format.
 
 ## Data interpretation
 
-Data is saved into data folder and partitioned by date (field `created_date` is added to both datasets). Script is
-loading all `submissions` for the defined period (one day by default) and all `comments` for these submissions only (
+Data is saved into data folder and partitioned by date (field `created_at` is added to both datasets). Script is loading
+all `submissions` for the defined period (one day by default) and all `comments` for these submissions only (
 defined period is not used for these load). When script is run twice within a short period of time, data would be
 duplicated, because it is saved in the `append` mode.
 
@@ -50,5 +50,5 @@ Logs are written in standard output
 - Data types are verified, non-matching entries from API are ignored
 - Entries from API with missing fields are ignored
 - Too big text replies are not verified
-- Pagination is not handled
+- Pagination is not handled (could be a problem if running for large period of time)
 - Situation when submission has a lot of comments (thousands) was not tested
