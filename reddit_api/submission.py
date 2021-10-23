@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from logzero import logger
 from typing import NamedTuple
 
@@ -16,14 +18,14 @@ class Submission(NamedTuple):
     author: str
     author_fullname: str
     retrieved_on: int
+    created_date: str
 
 
 class SubmissionSearch:
     def __init__(self, subreddit: str, num_of_days: int = 1):
         self.search_parameters = {
-            "sort": "desc",
             "subreddit": subreddit,
-            "after": num_of_days,
+            "after": f"{num_of_days}d",
             "fields": ["title", "selftext", "id", "upvote_ratio", "num_comments", "link_flair_text", "score",
                        "created_utc", "author", "author_fullname", "retrieved_on"],
         }
@@ -47,6 +49,8 @@ class SubmissionSearch:
         logger.info(f"Parsing received submissions")
         for submission in response_json["data"]:
             try:
+                timestamp = int(submission["created_utc"])
+                timestamp_as_datetime = datetime.fromtimestamp(timestamp)
                 search_results.append(
                     Submission(
                         title=submission["title"],
@@ -56,10 +60,11 @@ class SubmissionSearch:
                         num_comments=int(submission["num_comments"]),
                         link_flair_text=submission["link_flair_text"],
                         score=int(submission["score"]),
-                        created_utc=int(submission["created_utc"]),
+                        created_utc=timestamp,
                         author=submission["author"],
                         author_fullname=submission["author_fullname"],
                         retrieved_on=int(submission["retrieved_on"]),
+                        created_date=f"{timestamp_as_datetime.year}-{timestamp_as_datetime.month}-{timestamp_as_datetime.day}"
                     )
                 )
             except ValueError:

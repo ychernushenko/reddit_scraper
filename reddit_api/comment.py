@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from logzero import logger
 from typing import NamedTuple, Optional
 
@@ -11,6 +13,7 @@ class Comment(NamedTuple):
     author: str
     parent_id: str
     created_utc: int
+    created_date: str
 
 
 class CommentSearch:
@@ -49,13 +52,16 @@ class CommentSearch:
 
         data_item = data[0]
         try:
+            timestamp = int(data_item["created_utc"])
+            timestamp_as_datetime = datetime.fromtimestamp(timestamp)
             comment = Comment(
                 body=data_item["body"],
                 id=data_item["id"],
                 score=int(data_item["score"]),
                 author=data_item["author"],
                 parent_id=data_item["parent_id"],
-                created_utc=int(data_item["created_utc"]),
+                created_utc=timestamp,
+                created_date=f"{timestamp_as_datetime.year}-{timestamp_as_datetime.month}-{timestamp_as_datetime.day}"
             )
         except ValueError:
             logger.info(f"Unable to to parse reddit API response for comment: {data_item}")

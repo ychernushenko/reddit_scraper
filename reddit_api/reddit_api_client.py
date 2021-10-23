@@ -13,7 +13,7 @@ class Client:
         self.get_request_parameters[key] = value
 
     def search(self) -> dict[str, Any]:
-        logger.info(f"Making api GET request: {self.url}")
+        logger.info(f"Making api GET request: {self.url}, with parameters: {self.get_request_parameters}")
         response = requests.get(
             self.url,
             params=self.get_request_parameters,
