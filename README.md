@@ -34,6 +34,8 @@ Check `data` folder
 - For simplicity of implementation for every comment there is a separate request, this could be optimized, using search
   api with several ids
 - Code was not tested on spark cluster
+- Version with parallel `comment` fetching was also implemented, but server was failing with `429 - Too Many requests`
+  error
 
 ### Testing approach
 
